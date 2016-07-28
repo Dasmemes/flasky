@@ -29,9 +29,10 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             {% if not current_user.is_authenticated %}
-                            <a href="{{ url_for('users.login') }}">login</a>
+                            <li><a href="{{ url_for('users.login') }}">Login</a></li>
+                            <li><a href="{{ url_for('users.register') }}">Register</a></li>
                             {% else %}
-                            <a href="{{ url_for('users.logout') }}">logout</a>
+                            <li><a href="{{ url_for('users.logout') }}">Logout</a></li>
                             {% endif %}
                         </ul>
                     </div>
