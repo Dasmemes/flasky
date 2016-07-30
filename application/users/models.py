@@ -29,7 +29,7 @@ class User(db.Model):
         self._password = flask_bcrypt.generate_password_hash(password)
 
     def __repr__(self):
-        return '<User {!r}>'.format(self.username)
+        return self.username
 
     def is_authenticated(self):
         """All our registered users are authenticated"""

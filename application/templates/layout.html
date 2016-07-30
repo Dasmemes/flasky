@@ -20,11 +20,11 @@
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">Base</a>
+                        <a class="navbar-brand" href="/">Base</a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="/">Home</a></li>
                             <li><a href="#">About</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
@@ -32,6 +32,7 @@
                             <li><a href="{{ url_for('users.login') }}">Login</a></li>
                             <li><a href="{{ url_for('users.register') }}">Register</a></li>
                             {% else %}
+                            <li><a href="{{ url_for('users.account') }}">Account</a></li>
                             <li><a href="{{ url_for('users.logout') }}">Logout</a></li>
                             {% endif %}
                         </ul>

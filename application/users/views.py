@@ -6,7 +6,7 @@ from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length
 
 from .models import User
-from application import flask_bcrypt, db
+from application import flask_bcrypt, db, app
 
 
 Users = Blueprint('users', __name__, template_folder='templates')
@@ -21,8 +21,13 @@ class LoginForm(Form):
 class RegistrationForm(Form):
 
     username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), ])
+    email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
+
+
+@app.route('/', methods=["GET"])
+def home():
+    return render_template('index.html')
 
 
 @Users.route('/register', methods=['GET','POST'])
