@@ -46,3 +46,9 @@ class User(db.Model):
     def get_id(self):
         """Get the user ID as unicode string"""
         return str(self.id)
+
+    def commit(self):
+        db.session.add(self.username)
+        db.session.commit()
+        return True
+

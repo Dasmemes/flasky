@@ -6,7 +6,7 @@ from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length
 
 from .models import User
-from application import flask_bcrypt, db, app
+from application import flask_bcrypt, db
 
 
 Users = Blueprint('users', __name__, template_folder='templates')
@@ -25,11 +25,6 @@ class RegistrationForm(Form):
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
 
 
-@app.route('/', methods=["GET"])
-def home():
-    return render_template('index.html')
-
-
 @Users.route('/register', methods=['GET','POST'])
 def register():
     if current_user.is_authenticated:
@@ -39,6 +34,19 @@ def register():
     if form.validate_on_submit():
 
         user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+
+        username_taken = User.query.filter_by(username=form.username.data).first()
+
+        if username_taken:
+            flash("This username is already in use")
+            return render_template('users/register.html', form=form)
+
+        email_taken = User.query.filter_by(email=form.email.data).first()
+
+        if email_taken:
+            flash("There is already an account with this email address registered")
+            return render_template('users/register.html', form=form)
+
         db.session.add(user)
         db.session.commit()
 
